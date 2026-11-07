@@ -1,4 +1,4 @@
-# Automatización Selenium · Prácticas de campo semanas 8 y 10
+
 
 **Pendiente de ejecutar**: preparar entorno Windows con Google Chrome, Python 3, Node.js y PostgreSQL; arrancar la aplicación con `npm start`.
 
