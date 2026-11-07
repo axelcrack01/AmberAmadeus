@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Historial de ventas | Amber Amadeus Café</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="js/config.js" defer></script>
+    <script src="js/datos-demo.js" defer></script>
+    <script src="js/inventario-motor.js" defer></script>
+    <script src="js/servicio.js" defer></script>
+    <script src="js/comun.js" defer></script>
+    <script src="js/historial.js" defer></script>
+  </head>
+  <body data-pagina="historial">
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="marca">
+        <img class="marca-logo" src="assets/logo-negro-amarillo.png" alt="Logotipo oficial Amber Amadeus Café" />
+        <div><strong>Amber Amadeus</strong><small>CAFETERÍA DE ESPECIALIDAD</small></div>
+      </div>
+      <div class="menu-titulo">OPERACIONES DE LA CAFETERÍA</div>
+      <nav class="menu">
+        <a href="panel.html" class=""><span data-icono="inicio"></span>Panel general</a
+        ><a href="catalogo.html" class=""><span data-icono="catalogo"></span>Catálogo</a
+        ><a href="ventas.html" class=""><span data-icono="bolsa"></span>Registrar venta</a
+        ><a href="caja.html" class="" ><span data-icono="moneda"></span>Caja y cierres</a><a href="historial.html" class="actual" aria-current="page"
+          ><span data-icono="historial"></span>Historial de ventas</a
+        ><a href="resumen.html" class="" data-admin><span data-icono="grafico"></span>Reportes</a>
+      <a href="inventario.html">Inventario</a><a href="kardex.html">Kardex</a></nav>
+      <div class="sidebar-pie">
+        <strong>Amber Amadeus Café</strong>
+        <p>Control de catálogo, ventas y caja<br />Datos de prueba</p>
+        <div class="estado-conexion">
+          <span class="punto"></span><span data-modo>Cargando...</span>
+        </div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span data-icono="cafe"></span>Gestión comercial <b>/</b>
+          <span>Historial de ventas</span>
+        </div>
+        <div class="perfil">
+          <span class="avatar" id="avatar" data-testid="avatar">AA</span>
+          <div><strong id="nombreUsuario" data-testid="nombreUsuario">Usuario</strong><small id="rolUsuario" data-testid="rolUsuario"></small></div>
+          <button class="icon-button" id="salir" data-testid="salir" title="Cerrar sesión" aria-label="Cerrar sesión">
+            <span data-icono="salir"></span>
+          </button>
+        </div>
+      </header>
+      <main id="contenido" data-testid="contenido">
+        <div class="encabezado">
+          <div>
+            <p class="eyebrow">CONSULTA DE TRANSACCIONES</p>
+            <h1>Historial de ventas</h1>
+            <p>Busca ventas por número o producto, filtra por fecha y medio de pago, y revisa o exporta el detalle registrado.</p>
+          </div>
+          <button class="boton secundario" id="exportarVentas" data-testid="exportarVentas">
+            <span data-icono="descarga"></span> Exportar CSV
+          </button>
+        </div>
+
+        <section class="tarjeta">
+          <div class="tarjeta-cabecera">
+            <div>
+              <h2>Historial de ventas</h2>
+              <p id="conteoVentas" data-testid="conteoVentas">Cargando registros...</p>
+            </div>
+            
+          </div>
+          <form class="filtros" id="filtrosHistorial" data-testid="filtrosHistorial">
+            <div class="campo busqueda">
+              <label for="buscarHistorial">Buscar por registro o producto</label
+              ><input id="buscarHistorial" data-testid="buscarHistorial" type="search" placeholder="N.º de registro o producto" />
+            </div>
+            <div class="campo">
+              <label for="fechaDesde">Fecha inicial</label><input id="fechaDesde" data-testid="fechaDesde" type="date" />
+            </div>
+            <div class="campo">
+              <label for="fechaHasta">Fecha final</label><input id="fechaHasta" data-testid="fechaHasta" type="date" />
+            </div>
+            <div class="campo">
+              <label for="pagoFiltro">Medio de pago</label
+              ><select id="pagoFiltro" data-testid="pagoFiltro">
+                <option value="">Todos</option>
+                <option>EFECTIVO</option>
+                <option>TARJETA</option>
+                <option>YAPE</option>
+                <option>PLIN</option>
+              </select>
+            </div>
+            <button type="button" class="boton secundario" id="limpiarFiltros" data-testid="limpiarFiltros">Quitar filtros</button>
+          </form>
+          <div class="tabla-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Registro</th>
+                  <th>Fecha y hora</th>
+                  <th>Operador</th>
+                  <th>Pago</th>
+                  <th class="derecha">Total</th>
+                  <th>Detalle</th>
+                </tr>
+              </thead>
+              <tbody id="tablaVentas" data-testid="tablaVentas"></tbody>
+            </table>
+          </div>
+        </section>
+        <dialog id="modalRecibo" data-testid="modalRecibo" aria-labelledby="tituloRecibo">
+          <div class="modal-cabecera">
+            <h2 id="tituloRecibo" data-testid="tituloRecibo">Detalle de la venta</h2>
+            <button type="button" class="icon-button" data-cerrar="modalRecibo" aria-label="Cerrar">
+              <span data-icono="cerrar"></span>
+            </button>
+          </div>
+          <div class="modal-cuerpo" id="reciboContenido" data-testid="reciboContenido"></div>
+          <div class="modal-pie">
+            <button type="button" class="boton secundario" data-cerrar="modalRecibo">Cerrar</button
+            ><button class="boton" id="imprimirRecibo" data-testid="imprimirRecibo">
+              <span data-icono="imprimir"></span> Imprimir registro
+            </button>
+          </div>
+        </dialog>
+        <div class="nota">
+          <span data-icono="info"></span>
+          <div>
+            <strong>Datos de demostración:</strong> la carta, los precios y las ventas son ejemplos. No se procesan pagos ni se emiten comprobantes electrónicos.
+          </div>
+        </div>
+        <footer class="pagina-pie">
+          <span>Amber Amadeus Café · Los Olivos</span
+          ><span>Plataforma de prueba · No registra cobros reales</span>
+        </footer>
+      </main>
+    </div>
+    <div id="toast" data-testid="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

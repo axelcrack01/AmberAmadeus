@@ -1,0 +1,4 @@
+const {run,assert,By,Key}=require('../helpers');
+run({"id": "E2E-07", "historia": "HU-12", "requisito": "RF-12", "nombre": "precio_invalido", "prioridad": "Alta", "precondicion": "Servidor demo local QA, perfil nuevo y datos ficticios", "datos": "Catálogo demo; cantidades indicadas en pasos", "pasos": "Alta con precio negativo", "esperado": "Formulario rechaza y no persiste"},async h=>{
+await h.login();await h.go('catalogo');const n=(await h.api('/catalogo')).productos.length;await h.click('#nuevoProducto');await h.fill('#productoNombre','Precio QA');await h.select('#productoCategoria','1');await h.fill('#productoPrecio','-1');await h.click('#formProducto button[type=submit]');assert.equal(await h.d.executeScript('return document.querySelector("#productoPrecio").validity.valid'),false);assert.equal((await h.api('/catalogo')).productos.length,n);
+});

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control de caja | Amber Amadeus Café</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="js/config.js" defer></script>
+    <script src="js/datos-demo.js" defer></script>
+    <script src="js/inventario-motor.js" defer></script>
+    <script src="js/servicio.js" defer></script>
+    <script src="js/comun.js" defer></script>
+    <script src="js/caja.js" defer></script>
+  </head>
+  <body data-pagina="caja">
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="marca">
+        <img class="marca-logo" src="assets/logo-negro-amarillo.png" alt="Logotipo oficial Amber Amadeus Café" />
+        <div><strong>Amber Amadeus</strong><small>CAFETERÍA DE ESPECIALIDAD</small></div>
+      </div>
+      <div class="menu-titulo">OPERACIONES DE LA CAFETERÍA</div>
+      <nav class="menu">
+        <a href="panel.html" class=""
+          ><span data-icono="inicio"></span>Panel general</a
+        ><a href="catalogo.html" class=""><span data-icono="catalogo"></span>Catálogo</a
+        ><a href="ventas.html" class=""><span data-icono="bolsa"></span>Registrar venta</a
+        ><a href="caja.html" class="actual" aria-current="page" ><span data-icono="moneda"></span>Caja y cierres</a><a href="historial.html" class=""><span data-icono="historial"></span>Historial de ventas</a
+        ><a href="resumen.html" class="" data-admin><span data-icono="grafico"></span>Reportes</a>
+      <a href="inventario.html">Inventario</a><a href="kardex.html">Kardex</a></nav>
+      <div class="sidebar-pie">
+        <strong>Amber Amadeus Café</strong>
+        <p>Control de catálogo, ventas y caja<br />Datos de prueba</p>
+        <div class="estado-conexion">
+          <span class="punto"></span><span data-modo>Cargando...</span>
+        </div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span data-icono="cafe"></span>Gestión comercial <b>/</b> <span>Control de caja</span>
+        </div>
+        <div class="perfil">
+          <span class="avatar" id="avatar" data-testid="avatar">AA</span>
+          <div><strong id="nombreUsuario" data-testid="nombreUsuario">Usuario</strong><small id="rolUsuario" data-testid="rolUsuario"></small></div>
+          <button class="icon-button" id="salir" data-testid="salir" title="Cerrar sesión" aria-label="Cerrar sesión">
+            <span data-icono="salir"></span>
+          </button>
+        </div>
+      </header>
+      <main id="contenido" data-testid="contenido">
+<div class="encabezado"><div><p class="eyebrow">APERTURA, ARQUEO Y CIERRE</p><h1>Control de caja</h1><p>Abre una caja con fondo inicial, revisa las ventas en efectivo, registra el efectivo contado y consulta las diferencias del cierre.</p></div></div>
+<div class="caja-aviso"><strong>Datos de prueba:</strong> el arqueo considera únicamente ventas registradas en efectivo. Los importes se almacenan en este navegador y no sustituyen el cierre contable de la cafetería.</div>
+<div class="caja-grid">
+ <section class="tarjeta"><div class="tarjeta-cabecera"><div><h2>Caja del operador</h2><p>Consulta si tienes una caja abierta y el efectivo estimado del turno.</p></div></div>
+ <p id="estadoCaja" data-testid="estadoCaja" role="status">Consultando caja...</p>
+ <div class="caja-dato"><span>Fondo de apertura</span><strong id="fondoCaja" data-testid="fondoCaja" class="caja-numerico">—</strong></div>
+ <div class="caja-dato"><span>Ventas en efectivo del turno</span><strong id="ventasEfectivoCaja" data-testid="ventasEfectivoCaja" class="caja-numerico">—</strong></div>
+ <div class="caja-dato"><span>Efectivo esperado al cierre</span><strong id="efectivoEsperadoCaja" data-testid="efectivoEsperadoCaja" class="caja-numerico">—</strong></div>
+ </section>
+ <section class="tarjeta"><div class="tarjeta-cabecera"><div><h2>Abrir o cerrar caja</h2><p>Solo se permite una caja abierta por operador y un único cierre por turno.</p></div></div>
+ <form id="formAbrirCaja" data-testid="formAbrirCaja" class="caja-form"><div class="campo"><label for="fondoInicial">Fondo inicial (S/)</label><input id="fondoInicial" data-testid="fondoInicial" inputmode="decimal" type="number" min="0" max="100000" step="0.01" placeholder="100.00" required></div><button class="boton" type="submit">Abrir caja</button></form>
+ <form id="formCerrarCaja" data-testid="formCerrarCaja" class="caja-form" hidden><div class="campo"><label for="efectivoContado">Efectivo contado (S/)</label><input id="efectivoContado" data-testid="efectivoContado" inputmode="decimal" type="number" min="0" max="100000" step="0.01" required></div><button class="boton" type="submit">Cerrar caja</button></form>
+ <p class="muted" id="notaCaja" data-testid="notaCaja">Abre un turno para poder registrar su cierre.</p>
+ </section>
+</div>
+<section class="tarjeta" aria-label="Consolidado diario de cierres"><div class="tarjeta-cabecera"><div><h2>Consolidado diario · <span id="fechaConsolidado" data-testid="fechaConsolidado">hoy</span></h2><p id="alcanceConsolidado" data-testid="alcanceConsolidado">Resumen de turnos cerrados hoy en horario de Lima.</p></div></div><section class="metricas"><article class="metrica"><div class="metrica-etiqueta">Turnos cerrados</div><div class="metrica-valor" id="cierresDia" data-testid="cierresDia">0</div></article><article class="metrica"><div class="metrica-etiqueta">Efectivo esperado</div><div class="metrica-valor" id="esperadoDia" data-testid="esperadoDia">—</div></article><article class="metrica"><div class="metrica-etiqueta">Diferencia neta</div><div class="metrica-valor" id="diferenciaDia" data-testid="diferenciaDia">—</div></article></section></section>
+<section class="tarjeta caja-tabla"><div class="tarjeta-cabecera"><div><h2>Historial de aperturas y cierres</h2><p>Los administradores consultan todos los turnos; los cajeros únicamente sus propios registros.</p></div><button class="boton secundario" id="exportarCaja" data-testid="exportarCaja" type="button">Exportar CSV</button></div>
+<div class="tabla-scroll"><table><thead><tr><th>Turno / Operador</th><th>Apertura</th><th>Cierre</th><th>Fondo</th><th>Ventas efectivo</th><th>Contado</th><th>Diferencia</th><th>Estado</th></tr></thead><tbody id="tablaCajas" data-testid="tablaCajas"><tr><td colspan="8">Cargando...</td></tr></tbody></table></div></section>
+<footer class="pagina-pie">
+          <span>Amber Amadeus Café · Los Olivos</span
+          ><span>Plataforma de prueba · No registra cobros reales</span>
+        </footer>
+      </main>
+    </div>
+    <div id="toast" data-testid="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

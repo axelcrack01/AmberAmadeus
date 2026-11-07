@@ -1,0 +1,29 @@
+{
+  "name": "amber-amadeus-cafe-semana10",
+  "version": "3.0.0-t3",
+  "private": true,
+  "description": "Proyecto académico con HTML, CSS, JavaScript y PostgreSQL",
+  "scripts": {
+    "start": "node --env-file=.env servidor/server.js",
+    "preparar": "node --env-file=.env servidor/preparar.js",
+    "test": "node --test pruebas/*.test.js",
+    "comprobar": "node --env-file=.env servidor/comprobar.js",
+    "test:coverage": "node --test --experimental-test-coverage pruebas/*.test.js",
+    "preview": "node servidor/demo.js",
+    "demo": "node servidor/demo.js",
+    "migrar": "node --env-file=.env servidor/migrar.js",
+    "test:selenium": "node qa/selenium/run-all.js",
+    "test:integracion": "node --env-file=.env --test qa/integracion/api-postgres.test.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "express": "5.2.1",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "axe-core": "4.14.0",
+    "selenium-webdriver": "4.52.0"
+  }
+}

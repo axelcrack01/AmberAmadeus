@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ingreso | Amber Amadeus Café</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="js/config.js" defer></script>
+    <script src="js/datos-demo.js" defer></script>
+    <script src="js/inventario-motor.js" defer></script>
+    <script src="js/servicio.js" defer></script>
+    <script src="js/comun.js" defer></script>
+    <script src="js/login.js" defer></script>
+  </head>
+  <body>
+    <main class="login-layout">
+      <section class="login-visual" aria-label="Amber Amadeus Café">
+        <div class="marca">
+          <img class="marca-logo" src="assets/logo-negro-amarillo.png" alt="Logotipo oficial Amber Amadeus Café" />
+          <div><strong>Amber Amadeus</strong><small>CAFETERÍA DE ESPECIALIDAD</small></div>
+        </div>
+        <div class="login-mensaje">
+          <span class="eyebrow">ADMINISTRACIÓN DE LA CAFETERÍA</span>
+          <h1>Control de catálogo,<br />ventas y caja.</h1>
+          <p>Registra productos y precios, administra ventas internas, consulta los reportes y controla la apertura y el cierre de caja.</p>
+        </div>
+        <div class="login-sello">
+          <span>LOS OLIVOS · LIMA</span><span>GESTIÓN DE CAFETERÍA · SISTEMA DE PRUEBA</span>
+        </div>
+      </section>
+      <section class="login-form-zona" aria-labelledby="tituloIngreso">
+        <div>
+          <span class="eyebrow">ACCESO DE PERSONAL</span>
+          <h2 id="tituloIngreso" data-testid="tituloIngreso">Iniciar sesión</h2>
+          <p class="muted">Accede con el perfil de administrador o cajero para utilizar los módulos correspondientes.</p>
+          <form id="formLogin" data-testid="formLogin">
+            <div class="campo">
+              <label for="correo">Correo electrónico</label
+              ><input
+                id="correo" data-testid="correo"
+                type="email"
+                autocomplete="username"
+                placeholder="admin@demo.local"
+                required
+              />
+            </div>
+            <div class="campo">
+              <label for="clave">Contraseña</label
+              ><input
+                id="clave" data-testid="clave"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Ingresa tu contraseña"
+                required
+                maxlength="200"
+              />
+            </div>
+            <p class="error-form" id="errorLogin" data-testid="errorLogin" role="alert" hidden></p>
+            <button class="boton ancho" type="submit" id="btnIngresar" data-testid="btnIngresar">
+              Ingresar al sistema <span data-icono="flecha"></span>
+            </button>
+          </form>
+          <div class="login-demo">
+            <strong>Cuentas de prueba</strong><br />Contraseña de los dos perfiles:
+            <b>Demo2026!</b>
+            <div class="acciones">
+              <button type="button" data-cuenta="admin">Usar administrador</button
+              ><button type="button" data-cuenta="cajero">Usar cajero</button>
+            </div>
+          </div>
+          <p class="login-nota">
+            <span data-modo></span><br />Los registros son de prueba. No se cobran pagos reales ni se emiten comprobantes electrónicos.
+          </p>
+        </div>
+      </section>
+    </main>
+    <div id="toast" data-testid="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

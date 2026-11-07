@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo de productos | Amber Amadeus Café</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="js/config.js" defer></script>
+    <script src="js/datos-demo.js" defer></script>
+    <script src="js/inventario-motor.js" defer></script>
+    <script src="js/servicio.js" defer></script>
+    <script src="js/comun.js" defer></script>
+    <script src="js/catalogo.js" defer></script>
+  </head>
+  <body data-pagina="catalogo">
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="marca">
+        <img class="marca-logo" src="assets/logo-negro-amarillo.png" alt="Logotipo oficial Amber Amadeus Café" />
+        <div><strong>Amber Amadeus</strong><small>CAFETERÍA DE ESPECIALIDAD</small></div>
+      </div>
+      <div class="menu-titulo">OPERACIONES DE LA CAFETERÍA</div>
+      <nav class="menu">
+        <a href="panel.html" class=""><span data-icono="inicio"></span>Panel general</a
+        ><a href="catalogo.html" class="actual" aria-current="page"
+          ><span data-icono="catalogo"></span>Catálogo</a
+        ><a href="ventas.html" class=""><span data-icono="bolsa"></span>Registrar venta</a
+        ><a href="caja.html" class="" ><span data-icono="moneda"></span>Caja y cierres</a><a href="historial.html" class=""><span data-icono="historial"></span>Historial de ventas</a
+        ><a href="resumen.html" class="" data-admin><span data-icono="grafico"></span>Reportes</a>
+      <a href="inventario.html">Inventario</a><a href="kardex.html">Kardex</a></nav>
+      <div class="sidebar-pie">
+        <strong>Amber Amadeus Café</strong>
+        <p>Control de catálogo, ventas y caja<br />Datos de prueba</p>
+        <div class="estado-conexion">
+          <span class="punto"></span><span data-modo>Cargando...</span>
+        </div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span data-icono="cafe"></span>Gestión comercial <b>/</b>
+          <span>Catálogo</span>
+        </div>
+        <div class="perfil">
+          <span class="avatar" id="avatar" data-testid="avatar">AA</span>
+          <div><strong id="nombreUsuario" data-testid="nombreUsuario">Usuario</strong><small id="rolUsuario" data-testid="rolUsuario"></small></div>
+          <button class="icon-button" id="salir" data-testid="salir" title="Cerrar sesión" aria-label="Cerrar sesión">
+            <span data-icono="salir"></span>
+          </button>
+        </div>
+      </header>
+      <main id="contenido" data-testid="contenido">
+        <div class="encabezado">
+          <div>
+            <p class="eyebrow">ADMINISTRACIÓN DEL CATÁLOGO</p>
+            <h1>Catálogo de productos</h1>
+            <p>Crea y edita categorías y productos, establece precios y controla qué artículos aparecen al registrar una venta.</p>
+          </div>
+          <button class="boton" id="nuevoProducto" data-testid="nuevoProducto" data-admin>
+            <span data-icono="mas"></span> Nuevo producto
+          </button>
+        </div>
+
+        <div class="catalogo-layout">
+          <section class="tarjeta">
+            <div class="tarjeta-cabecera">
+              <div>
+                <h2>Productos</h2>
+                <p id="conteoProductos" data-testid="conteoProductos">Cargando catálogo...</p>
+              </div>
+              
+            </div>
+            <div class="filtros">
+              <div class="campo busqueda">
+                <label for="buscarProducto">Buscar por nombre del producto</label
+                ><input id="buscarProducto" data-testid="buscarProducto" type="search" placeholder="Ej. Cappuccino" />
+              </div>
+              <div class="campo">
+                <label for="filtroCategoria">Filtrar por categoría</label
+                ><select id="filtroCategoria" data-testid="filtroCategoria">
+                  <option value="">Todas</option>
+                </select>
+              </div>
+            </div>
+            <div class="tabla-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th data-admin>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="tablaProductos" data-testid="tablaProductos"></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="tarjeta">
+            <div class="tarjeta-cabecera">
+              <div>
+                <h2>Categorías</h2>
+                <p>Organiza la carta en grupos de productos y bebidas.</p>
+              </div>
+              <button
+                class="icon-button"
+                id="nuevaCategoria" data-testid="nuevaCategoria"
+                data-admin
+                aria-label="Nueva categoría"
+              >
+                <span data-icono="mas"></span>
+              </button>
+            </div>
+            <div class="categorias-lista" id="listaCategorias" data-testid="listaCategorias"></div>
+          </section>
+        </div>
+        <dialog id="modalProducto" data-testid="modalProducto" aria-labelledby="tituloProducto">
+          <form id="formProducto" data-testid="formProducto">
+            <div class="modal-cabecera">
+              <h2 id="tituloProducto" data-testid="tituloProducto">Nuevo producto</h2>
+              <button
+                type="button"
+                class="icon-button"
+                data-cerrar="modalProducto"
+                aria-label="Cerrar"
+              >
+                <span data-icono="cerrar"></span>
+              </button>
+            </div>
+            <div class="modal-cuerpo">
+              <input id="productoId" data-testid="productoId" type="hidden" />
+              <div class="form-grid">
+                <div class="campo completo">
+                  <label for="productoNombre">Nombre del producto</label
+                  ><input
+                    id="productoNombre" data-testid="productoNombre"
+                    required
+                    minlength="2"
+                    maxlength="100"
+                    placeholder="Nombre del producto"
+                  />
+                </div>
+                <div class="campo">
+                  <label for="productoCategoria">Categoría</label
+                  ><select id="productoCategoria" data-testid="productoCategoria" required></select>
+                </div>
+                <div class="campo">
+                  <label for="productoPrecio">Precio de venta (S/)</label
+                  ><input
+                    id="productoPrecio" data-testid="productoPrecio"
+                    type="number"
+                    min="0.01"
+                    max="10000"
+                    step="0.01"
+                    required
+                    placeholder="0.00"
+                  />
+                </div>
+                <div class="campo completo">
+                  <label for="productoDescripcion">Descripción del producto</label
+                  ><textarea
+                    id="productoDescripcion" data-testid="productoDescripcion"
+                    maxlength="200"
+                    placeholder="Ej. Café filtrado de origen peruano"
+                  ></textarea>
+                </div>
+                <label class="check completo"
+                  ><input id="productoDisponible" data-testid="productoDisponible" type="checkbox" checked /> Disponible para
+                  vender</label
+                >
+              </div>
+              <p id="errorProducto" data-testid="errorProducto" class="error-form" role="alert" hidden></p>
+            </div>
+            <div class="modal-pie">
+              <button type="button" class="boton secundario" data-cerrar="modalProducto">
+                Cancelar</button
+              ><button class="boton" type="submit">Guardar producto</button>
+            </div>
+          </form>
+        </dialog>
+        <dialog id="modalCategoria" data-testid="modalCategoria" aria-labelledby="tituloCategoria">
+          <form id="formCategoria" data-testid="formCategoria">
+            <div class="modal-cabecera">
+              <h2 id="tituloCategoria" data-testid="tituloCategoria">Nueva categoría</h2>
+              <button
+                type="button"
+                class="icon-button"
+                data-cerrar="modalCategoria"
+                aria-label="Cerrar"
+              >
+                <span data-icono="cerrar"></span>
+              </button>
+            </div>
+            <div class="modal-cuerpo">
+              <input id="categoriaId" data-testid="categoriaId" type="hidden" />
+              <div class="campo">
+                <label for="categoriaNombre">Nombre de la categoría</label
+                ><input id="categoriaNombre" data-testid="categoriaNombre" required minlength="2" maxlength="80" />
+              </div>
+              <label class="check check-espacio"
+                ><input id="categoriaActiva" data-testid="categoriaActiva" type="checkbox" checked /> Categoría activa</label
+              >
+              <p class="ayuda">Una categoría inactiva impide seleccionar sus productos en nuevas ventas; el historial conserva las ventas anteriores.</p>
+              <p id="errorCategoria" data-testid="errorCategoria" class="error-form" role="alert" hidden></p>
+            </div>
+            <div class="modal-pie">
+              <button type="button" class="boton secundario" data-cerrar="modalCategoria">
+                Cancelar</button
+              ><button class="boton" type="submit">Guardar categoría</button>
+            </div>
+          </form>
+        </dialog>
+
+        <div class="nota">
+          <span data-icono="info"></span>
+          <div>
+            <strong>Datos de demostración:</strong> la carta, los precios y las ventas son ejemplos. No se procesan pagos ni se emiten comprobantes electrónicos.
+          </div>
+        </div>
+        <footer class="pagina-pie">
+          <span>Amber Amadeus Café · Los Olivos</span
+          ><span>Plataforma de prueba · No registra cobros reales</span>
+        </footer>
+      </main>
+    </div>
+    <div id="toast" data-testid="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kardex | Amber Amadeus Café</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="js/config.js" defer></script>
+    <script src="js/datos-demo.js" defer></script>
+    <script src="js/inventario-motor.js" defer></script>
+    <script src="js/servicio.js" defer></script>
+    <script src="js/comun.js" defer></script>
+    <script src="js/kardex-ui.js" defer></script>
+  </head>
+  <body data-pagina="caja">
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="marca">
+        <img class="marca-logo" src="assets/logo-negro-amarillo.png" alt="Logotipo oficial Amber Amadeus Café" />
+        <div><strong>Amber Amadeus</strong><small>CAFETERÍA DE ESPECIALIDAD</small></div>
+      </div>
+      <div class="menu-titulo">OPERACIONES DE LA CAFETERÍA</div>
+      <nav class="menu">
+        <a href="panel.html" class=""
+          ><span data-icono="inicio"></span>Panel general</a
+        ><a href="catalogo.html" class=""><span data-icono="catalogo"></span>Catálogo</a
+        ><a href="ventas.html" class=""><span data-icono="bolsa"></span>Registrar venta</a
+        ><a href="caja.html"  ><span data-icono="moneda"></span>Caja y cierres</a><a href="historial.html" class=""><span data-icono="historial"></span>Historial de ventas</a
+        ><a href="resumen.html" class="" data-admin><span data-icono="grafico"></span>Reportes</a>
+      <a href="inventario.html">Inventario</a><a href="kardex.html">Kardex</a></nav>
+      <div class="sidebar-pie">
+        <strong>Amber Amadeus Café</strong>
+        <p>Control de catálogo, ventas y caja<br />Datos de prueba</p>
+        <div class="estado-conexion">
+          <span class="punto"></span><span data-modo>Cargando...</span>
+        </div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span data-icono="cafe"></span>Gestión comercial <b>/</b> <span>Kardex</span>
+        </div>
+        <div class="perfil">
+          <span class="avatar" id="avatar" data-testid="avatar">AA</span>
+          <div><strong id="nombreUsuario" data-testid="nombreUsuario">Usuario</strong><small id="rolUsuario" data-testid="rolUsuario"></small></div>
+          <button class="icon-button" id="salir" data-testid="salir" title="Cerrar sesión" aria-label="Cerrar sesión">
+            <span data-icono="salir"></span>
+          </button>
+        </div>
+      </header>
+      <main id="contenido" data-testid="contenido"><h1>Kardex</h1><p>Histórico de movimientos. Las correcciones se registran con movimientos compensatorios y motivo; no se editan movimientos anteriores.</p><div class="caja-aviso" data-modo></div>
+<section class="tarjeta"><h2>Filtros</h2><label for="filtroProducto">Nombre o referencia</label><input id="filtroProducto" data-testid="filtroProducto" type="search">
+<label for="filtroTipo">Tipo</label><select id="filtroTipo" data-testid="filtroTipo"><option value="">Todos</option><option>ENTRADA</option><option>SALIDA</option><option>VENTA</option><option>AJUSTE_ENTRADA</option><option>AJUSTE_SALIDA</option></select>
+<label for="desde">Desde</label><input id="desde" data-testid="desde" type="date"><label for="hasta">Hasta</label><input id="hasta" data-testid="hasta" type="date"><button class="boton" id="exportar" data-testid="exportar">Exportar CSV filtrado</button>
+<p id="conteo" data-testid="conteo" role="status"></p><div style="overflow:auto"><table><thead><tr><th>Fecha</th><th>Producto</th><th>Tipo</th><th>Cantidad</th><th>Anterior</th><th>Saldo</th><th>Referencia</th><th>Motivo</th><th>Usuario</th></tr></thead><tbody id="movimientos" data-testid="movimientos"></tbody></table></div></section></main></div><div id="toast" data-testid="toast" role="status" aria-live="polite"></div></body></html>

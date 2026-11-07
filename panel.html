@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel general | Amber Amadeus Café</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="js/config.js" defer></script>
+    <script src="js/datos-demo.js" defer></script>
+    <script src="js/inventario-motor.js" defer></script>
+    <script src="js/servicio.js" defer></script>
+    <script src="js/comun.js" defer></script>
+    <script src="js/panel.js" defer></script>
+  </head>
+  <body data-pagina="panel">
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="marca">
+        <img class="marca-logo" src="assets/logo-negro-amarillo.png" alt="Logotipo oficial Amber Amadeus Café" />
+        <div><strong>Amber Amadeus</strong><small>CAFETERÍA DE ESPECIALIDAD</small></div>
+      </div>
+      <div class="menu-titulo">OPERACIONES DE LA CAFETERÍA</div>
+      <nav class="menu">
+        <a href="panel.html" class="actual" aria-current="page"
+          ><span data-icono="inicio"></span>Panel general</a
+        ><a href="catalogo.html" class=""><span data-icono="catalogo"></span>Catálogo</a
+        ><a href="ventas.html" class=""><span data-icono="bolsa"></span>Registrar venta</a
+        ><a href="caja.html" class="" ><span data-icono="moneda"></span>Caja y cierres</a><a href="historial.html" class=""><span data-icono="historial"></span>Historial de ventas</a
+        ><a href="resumen.html" class="" data-admin><span data-icono="grafico"></span>Reportes</a>
+      <a href="inventario.html">Inventario</a><a href="kardex.html">Kardex</a></nav>
+      <div class="sidebar-pie">
+        <strong>Amber Amadeus Café</strong>
+        <p>Control de catálogo, ventas y caja<br />Datos de prueba</p>
+        <div class="estado-conexion">
+          <span class="punto"></span><span data-modo>Cargando...</span>
+        </div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span data-icono="cafe"></span>Gestión comercial <b>/</b> <span>Panel general</span>
+        </div>
+        <div class="perfil">
+          <span class="avatar" id="avatar" data-testid="avatar">AA</span>
+          <div><strong id="nombreUsuario" data-testid="nombreUsuario">Usuario</strong><small id="rolUsuario" data-testid="rolUsuario"></small></div>
+          <button class="icon-button" id="salir" data-testid="salir" title="Cerrar sesión" aria-label="Cerrar sesión">
+            <span data-icono="salir"></span>
+          </button>
+        </div>
+      </header>
+      <main id="contenido" data-testid="contenido">
+        <div class="encabezado">
+          <div>
+            <p class="eyebrow">OPERACIONES DIARIAS</p>
+            <h1>Panel general</h1>
+            <p>Supervisa el importe vendido hoy, las ventas registradas y los productos disponibles del catálogo.</p>
+          </div>
+        </div>
+
+        <section class="hero">
+          <div>
+            <span class="eyebrow">MÓDULO DE VENTAS</span>
+            <h2>Registro de ventas</h2>
+            <p>
+              Agrega productos de la carta, ajusta sus cantidades, selecciona el medio de pago y guarda la venta.
+            </p>
+            <a class="boton" href="ventas.html"
+              >Registrar venta <span data-icono="flecha"></span
+            ></a>
+          </div>
+          <div class="hero-arte" data-icono="cafe"></div>
+        </section>
+        <section class="metricas" aria-label="Indicadores de hoy">
+          <article class="metrica">
+            <div class="metrica-etiqueta">Importe vendido hoy <span data-icono="moneda"></span></div>
+            <div class="metrica-valor" id="totalHoy" data-testid="totalHoy">—</div>
+            <small>Suma de las ventas registradas hoy</small>
+          </article>
+          <article class="metrica">
+            <div class="metrica-etiqueta">Ventas registradas hoy <span data-icono="bolsa"></span></div>
+            <div class="metrica-valor" id="ventasHoy" data-testid="ventasHoy">—</div>
+            <small id="alcanceVentas" data-testid="alcanceVentas">Según el rol de la sesión</small>
+          </article>
+          <article class="metrica">
+            <div class="metrica-etiqueta">
+              Productos disponibles <span data-icono="catalogo"></span>
+            </div>
+            <div class="metrica-valor" id="productosActivos" data-testid="productosActivos">—</div>
+            <small>Productos habilitados para nuevas ventas</small>
+          </article>
+        </section>
+        <div class="dos-columnas">
+          <section class="tarjeta">
+            <div class="tarjeta-cabecera">
+              <div>
+                <h2>Ventas recientes</h2>
+                <p>Consulta los últimos cinco registros de venta.</p>
+              </div>
+              <a class="boton texto" href="historial.html">Abrir historial →</a>
+            </div>
+            <div class="tabla-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Registro</th>
+                    <th>Pago</th>
+                    <th>Hora</th>
+                    <th class="derecha">Total</th>
+                  </tr>
+                </thead>
+                <tbody id="ultimasVentas" data-testid="ultimasVentas"></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="tarjeta">
+            <div class="tarjeta-cabecera">
+              <div>
+                <h2>Productos con más unidades vendidas</h2>
+                <p>Clasificación por unidades vendidas durante el día.</p>
+              </div>
+            </div>
+            <div class="lista-resumen" id="masVendidos" data-testid="masVendidos"></div>
+          </section>
+        </div>
+
+        <div class="nota">
+          <span data-icono="info"></span>
+          <div>
+            <strong>Datos de demostración:</strong> la carta, los precios y las ventas son ejemplos. No se procesan pagos ni se emiten comprobantes electrónicos.
+          </div>
+        </div>
+        <footer class="pagina-pie">
+          <span>Amber Amadeus Café · Los Olivos</span
+          ><span>Plataforma de prueba · No registra cobros reales</span>
+        </footer>
+      </main>
+    </div>
+    <div id="toast" data-testid="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

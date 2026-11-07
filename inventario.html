@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventario | Amber Amadeus Café</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="js/config.js" defer></script>
+    <script src="js/datos-demo.js" defer></script>
+    <script src="js/inventario-motor.js" defer></script>
+    <script src="js/servicio.js" defer></script>
+    <script src="js/comun.js" defer></script>
+    <script src="js/inventario-ui.js" defer></script>
+  </head>
+  <body data-pagina="caja">
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="marca">
+        <img class="marca-logo" src="assets/logo-negro-amarillo.png" alt="Logotipo oficial Amber Amadeus Café" />
+        <div><strong>Amber Amadeus</strong><small>CAFETERÍA DE ESPECIALIDAD</small></div>
+      </div>
+      <div class="menu-titulo">OPERACIONES DE LA CAFETERÍA</div>
+      <nav class="menu">
+        <a href="panel.html" class=""
+          ><span data-icono="inicio"></span>Panel general</a
+        ><a href="catalogo.html" class=""><span data-icono="catalogo"></span>Catálogo</a
+        ><a href="ventas.html" class=""><span data-icono="bolsa"></span>Registrar venta</a
+        ><a href="caja.html"  ><span data-icono="moneda"></span>Caja y cierres</a><a href="historial.html" class=""><span data-icono="historial"></span>Historial de ventas</a
+        ><a href="resumen.html" class="" data-admin><span data-icono="grafico"></span>Reportes</a>
+      <a href="inventario.html">Inventario</a><a href="kardex.html">Kardex</a></nav>
+      <div class="sidebar-pie">
+        <strong>Amber Amadeus Café</strong>
+        <p>Control de catálogo, ventas y caja<br />Datos de prueba</p>
+        <div class="estado-conexion">
+          <span class="punto"></span><span data-modo>Cargando...</span>
+        </div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span data-icono="cafe"></span>Gestión comercial <b>/</b> <span>Inventario</span>
+        </div>
+        <div class="perfil">
+          <span class="avatar" id="avatar" data-testid="avatar">AA</span>
+          <div><strong id="nombreUsuario" data-testid="nombreUsuario">Usuario</strong><small id="rolUsuario" data-testid="rolUsuario"></small></div>
+          <button class="icon-button" id="salir" data-testid="salir" title="Cerrar sesión" aria-label="Cerrar sesión">
+            <span data-icono="salir"></span>
+          </button>
+        </div>
+      </header>
+      <main id="contenido" data-testid="contenido"><h1>Inventario</h1><p>Control por unidad, gramos o mililitros. El saldo inicial se registra como una entrada con motivo. Solo productos controlados por unidad se descuentan directamente al vender.</p>
+<div class="caja-aviso" data-modo></div>
+<section class="tarjeta" data-admin><h2>Configurar producto o insumo</h2>
+<p>Crea el producto en Catálogo. Para insumos, desactiva su disponibilidad de venta; las recetas de bebidas requieren validación de la cafetería.</p>
+<form id="ficha" data-testid="ficha" class="caja-form">
+<label for="producto">Producto</label><select id="producto" data-testid="producto" required></select>
+<label for="sku">SKU</label><input id="sku" data-testid="sku" required minlength="2" maxlength="40">
+<label for="unidad">Unidad base</label><select id="unidad" data-testid="unidad"><option value="unidad">Unidad</option><option value="g">Gramos</option><option value="ml">Mililitros</option></select>
+<label for="minimo">Stock mínimo</label><input id="minimo" data-testid="minimo" type="number" min="0" max="1000000000" step="1" value="0" required>
+<label><input id="activo" data-testid="activo" type="checkbox" checked> Control activo</label><button class="boton">Guardar ficha</button></form></section>
+<section class="tarjeta" data-admin><h2>Registrar movimiento</h2><form id="movimiento" data-testid="movimiento" class="caja-form">
+<label for="item">Producto controlado</label><select id="item" data-testid="item" required></select>
+<label for="tipo">Tipo</label><select id="tipo" data-testid="tipo"><option>ENTRADA</option><option>SALIDA</option><option>AJUSTE_ENTRADA</option><option>AJUSTE_SALIDA</option></select>
+<label for="cantidad">Cantidad positiva en unidad base</label><input id="cantidad" data-testid="cantidad" type="number" min="1" max="1000000000" step="1" required>
+<label for="motivo">Motivo</label><input id="motivo" data-testid="motivo" minlength="3" maxlength="200" required>
+<label for="referencia">Referencia de compra o ajuste</label><input id="referencia" data-testid="referencia" maxlength="100">
+<button class="boton">Registrar movimiento</button></form></section>
+<section class="tarjeta"><h2>Existencias</h2><label for="buscarStock">Buscar nombre o SKU</label><input id="buscarStock" data-testid="buscarStock" type="search">
+<p id="alertaStock" data-testid="alertaStock" role="status"></p><div style="overflow:auto"><table><thead><tr><th>Producto</th><th>SKU</th><th>Unidad</th><th>Stock</th><th>Mínimo</th><th>Estado</th></tr></thead><tbody id="stocks" data-testid="stocks"></tbody></table></div></section></main></div><div id="toast" data-testid="toast" role="status" aria-live="polite"></div></body></html>

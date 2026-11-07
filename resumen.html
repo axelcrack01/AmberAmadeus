@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reportes de ventas | Amber Amadeus Café</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="js/config.js" defer></script>
+    <script src="js/datos-demo.js" defer></script>
+    <script src="js/inventario-motor.js" defer></script>
+    <script src="js/servicio.js" defer></script>
+    <script src="js/comun.js" defer></script>
+    <script src="js/resumen.js" defer></script>
+  </head>
+  <body data-pagina="resumen">
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <aside class="sidebar" aria-label="Navegación principal">
+      <div class="marca">
+        <img class="marca-logo" src="assets/logo-negro-amarillo.png" alt="Logotipo oficial Amber Amadeus Café" />
+        <div><strong>Amber Amadeus</strong><small>CAFETERÍA DE ESPECIALIDAD</small></div>
+      </div>
+      <div class="menu-titulo">OPERACIONES DE LA CAFETERÍA</div>
+      <nav class="menu">
+        <a href="panel.html" class=""><span data-icono="inicio"></span>Panel general</a
+        ><a href="catalogo.html" class=""><span data-icono="catalogo"></span>Catálogo</a
+        ><a href="ventas.html" class=""><span data-icono="bolsa"></span>Registrar venta</a
+        ><a href="caja.html" class="" ><span data-icono="moneda"></span>Caja y cierres</a><a href="historial.html" class=""><span data-icono="historial"></span>Historial de ventas</a
+        ><a href="resumen.html" class="actual" aria-current="page" data-admin
+          ><span data-icono="grafico"></span>Reportes</a
+        >
+      <a href="inventario.html">Inventario</a><a href="kardex.html">Kardex</a></nav>
+      <div class="sidebar-pie">
+        <strong>Amber Amadeus Café</strong>
+        <p>Control de catálogo, ventas y caja<br />Datos de prueba</p>
+        <div class="estado-conexion">
+          <span class="punto"></span><span data-modo>Cargando...</span>
+        </div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span data-icono="cafe"></span>Gestión comercial <b>/</b>
+          <span>Reportes de ventas</span>
+        </div>
+        <div class="perfil">
+          <span class="avatar" id="avatar" data-testid="avatar">AA</span>
+          <div><strong id="nombreUsuario" data-testid="nombreUsuario">Usuario</strong><small id="rolUsuario" data-testid="rolUsuario"></small></div>
+          <button class="icon-button" id="salir" data-testid="salir" title="Cerrar sesión" aria-label="Cerrar sesión">
+            <span data-icono="salir"></span>
+          </button>
+        </div>
+      </header>
+      <main id="contenido" data-testid="contenido">
+        <div class="encabezado">
+          <div>
+            <p class="eyebrow">ANÁLISIS DE VENTAS</p>
+            <h1>Reportes de ventas</h1>
+            <p>Consulta los importes de ventas registradas, la cantidad de operaciones, el ticket promedio, los medios de pago y los productos más vendidos.</p>
+          </div>
+        </div>
+
+        <section class="tarjeta">
+          <div class="tarjeta-cabecera">
+            <div>
+              <h2>Seleccionar período</h2>
+              <p>Establece el rango de fechas para calcular los indicadores.</p>
+            </div>
+          </div>
+          <form id="filtrosResumen" data-testid="filtrosResumen" class="filtros">
+            <div class="campo">
+              <label for="desdeResumen">Fecha inicial</label
+              ><input id="desdeResumen" data-testid="desdeResumen" type="date" required />
+            </div>
+            <div class="campo">
+              <label for="hastaResumen">Fecha final</label
+              ><input id="hastaResumen" data-testid="hastaResumen" type="date" required />
+            </div>
+            <button class="boton" type="submit">Actualizar reporte</button><button class="boton secundario" type="button" id="exportarResumen" data-testid="exportarResumen">Exportar CSV</button>
+          </form>
+        </section>
+        <section class="metricas" aria-label="Indicadores del período">
+          <article class="metrica">
+            <div class="metrica-etiqueta">Total vendido en el período <span data-icono="moneda"></span></div>
+            <div class="metrica-valor" id="totalResumen" data-testid="totalResumen">—</div>
+            <small>Suma de las ventas del período</small>
+          </article>
+          <article class="metrica">
+            <div class="metrica-etiqueta">Ventas registradas <span data-icono="bolsa"></span></div>
+            <div class="metrica-valor" id="cantidadResumen" data-testid="cantidadResumen">—</div>
+            <small>Número de ventas guardadas</small>
+          </article>
+          <article class="metrica">
+            <div class="metrica-etiqueta">Ticket promedio <span data-icono="grafico"></span></div>
+            <div class="metrica-valor" id="promedioResumen" data-testid="promedioResumen">—</div>
+            <small>Importe total ÷ número de ventas</small>
+          </article>
+        </section>
+        <section class="tarjeta"><div class="tarjeta-cabecera"><div><h2>Ventas por día</h2><p>Comparación de importes y número de transacciones por fecha del período seleccionado.</p></div></div><div class="tabla-scroll"><table><thead><tr><th>Fecha</th><th>Operaciones</th><th>Importe</th></tr></thead><tbody id="detalleDiario" data-testid="detalleDiario"></tbody></table></div></section><div class="dos-columnas">
+          <section class="tarjeta">
+            <div class="tarjeta-cabecera">
+              <div>
+                <h2>Medios de pago</h2>
+                <p>Importes registrados por efectivo, tarjeta, Yape y Plin.</p>
+              </div>
+            </div>
+            <div class="lista-resumen" id="pagosResumen" data-testid="pagosResumen"></div>
+          </section>
+          <section class="tarjeta">
+            <div class="tarjeta-cabecera">
+              <div>
+                <h2>Productos más vendidos</h2>
+                <p>Ranking según las unidades vendidas en el período seleccionado.</p>
+              </div>
+            </div>
+            <div class="lista-resumen" id="productosResumen" data-testid="productosResumen"></div>
+          </section>
+        </div>
+
+        <div class="nota">
+          <span data-icono="info"></span>
+          <div>
+            <strong>Datos de demostración:</strong> la carta, los precios y las ventas son ejemplos. No se procesan pagos ni se emiten comprobantes electrónicos.
+          </div>
+        </div>
+        <footer class="pagina-pie">
+          <span>Amber Amadeus Café · Los Olivos</span
+          ><span>Plataforma de prueba · No registra cobros reales</span>
+        </footer>
+      </main>
+    </div>
+    <div id="toast" data-testid="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
