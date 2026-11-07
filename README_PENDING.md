@@ -1,1 +1,0 @@
-Proyecto Amber Amadeus T3. Código en preparación.
