@@ -1,5 +1,21 @@
 # Amber Amadeus Café — T3
 
+## Ejecutar la T3 en Windows (preparado para la evaluación)
+
+El repositorio `main` ya contiene la versión **3.0.0-t3**, Inventario, Kardex y QA. Para preparar una computadora nueva:
+
+```powershell
+cd D:\
+git clone https://github.com/axelcrack01/AmberAmadeus.git
+cd D:\AmberAmadeus
+powershell -NoProfile -ExecutionPolicy Bypass -File .\INICIAR_T3_WINDOWS.ps1
+```
+
+El script instala dependencias si faltan, ejecuta pruebas Node y cobertura, guarda una transcripción en `qa/evidencias/sesiones/` y abre el servidor demo en **http://127.0.0.1:3200** (mantén su consola abierta). Para solo comprobar las pruebas sin iniciar el servidor, agrega `-SoloPruebas`.
+
+Lee [la guía de PC 11–13 y evidencias](GUIA_EJECUCION_Y_EVIDENCIAS_T3.md). GitHub Actions ejecuta automáticamente las pruebas Node en cada push. **Selenium** requiere Chrome/Edge y, con selenium-webdriver 4.52.0, una versión compatible de Node (por ejemplo 24.22.1 o posterior en la rama 24); sus escenarios no se presumen aprobados hasta ejecutarlos. No subas `.env` ni datos reales.
+
+
 Código fuente del sistema académico Amber Amadeus, con frontend HTML/CSS/JavaScript,
 backend Node.js/Express/PostgreSQL, Inventario, Kardex y pruebas QA.
 
