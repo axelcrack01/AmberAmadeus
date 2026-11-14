@@ -1,0 +1,28 @@
+name: QA Node T3
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  pruebas-node:
+    name: Pruebas unitarias y cobertura
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Obtener codigo
+        uses: actions/checkout@v4
+      - name: Preparar Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Verificar pruebas
+        run: npm test
+      - name: Cobertura instrumental
+        run: npm run test:coverage
